@@ -14,7 +14,8 @@ module.exports = {
     sidebar: {
       '/vue源码解析/': [
         '',
-        'CREATEELEMENT'
+        'CREATEELEMENT',
+        'MVVM'
       ],
       '/javaScript/': [
         '',
@@ -25,7 +26,6 @@ module.exports = {
       '/dataStructureAndAlgorithm/': [
         '',
         'DATASTRUCT',
-
       ]
     }
   },
