@@ -1,9 +1,32 @@
 # MVVM原理
 
-先写一个简单的例子
+vue采用的是数据劫持结合发布者-订阅者模式，通过`Object.defineProperty()`来劫持各个属性的setter,getter,在数据变动时发布消息给订阅者，触发相应的监听回调
+
+## Object.defineProperty
+`Object.defineProperty`方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象，先来看一下它的语法：
+
+``` js
+Object.defineProperty(obj, prop, descriptor)
+```
+
+> `obj`是要在其上定义属性的对象  
+>`prop`是要定义或修改的属性的名称  
+>`descriptor`是将被定义或修改的属性描述符  
+
+核心的是`descriptor`里面的get和set  
+`get`是一个给属性提供的getter()方法，当我们访问了该属性的时候就会触发getter方法  
+`set`是一个给属性提供的setter()方法，当我们对该属性做修改的时候会触发setter方法  
+
+一旦对象拥有了getter和setter,我们就可以把这个对象称为响应式对象
+
+## 简易版流程图
+
+![](../assets/img/mvvmProcess.png)
+
+## Example
+让我们看一个例子
 
 ``` html
-
 <div id="app">
     <h2>{{person.name}} -- {{person.age}}</h2>
     <h3>{{person.fav}}</h3>
@@ -15,13 +38,11 @@
     <button v-on:click="handleClick">v-on:click</button>
     <button @click="handleClick">@click</button>
 </div>
-
 ```
 
 然后这里引入自己写的MVue.js 和 Observer.js
 
 ``` js
-
 let vm = new MVue({
     el: '#app',
     data: {
@@ -40,13 +61,11 @@ let vm = new MVue({
         }
     }
 })
-
 ```
 
 接下来就是MVue.js的内容啦
 
 ``` js
-
 //编译模版执行
 const complierUtil = {
     //处理person.name这种对象类型,取出真正的value
@@ -227,14 +246,12 @@ class Complier {
         return node.nodeType === 1
     }
 }
-
 ```
 
 
 这里是收集依赖器和观察者模式的内容 Observer.js
 
 ``` js
-
 class Watcher {
     constructor(vm, expr, cb) {
         this.vm = vm
@@ -304,5 +321,4 @@ class Observer {
         })
     }
 }
-
 ```
