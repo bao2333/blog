@@ -1,4 +1,4 @@
-# MVVM原理
+# MVVM解析
 
 vue采用的是数据劫持结合发布者-订阅者模式，通过`Object.defineProperty()`来劫持各个属性的setter,getter,在数据变动时发布消息给订阅者，触发相应的监听回调
 

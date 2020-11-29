@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /bg9.jpg
+heroImage: /bg.png
 actionText: 小二，上酒 →
 actionLink: /vue源码解析/
 # features:
